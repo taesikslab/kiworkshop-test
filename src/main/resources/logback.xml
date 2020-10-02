@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true">
+    <springProfile name="local">
+        <include resource="org/springframework/boot/logging/logback/base.xml"/>
+    </springProfile>
+
+    <springProfile name="prod">
+        <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+        <property name="LOG_PATH" value="/Users/kimminji/ming/kiworkshop/spring"/>
+
+        <!-- INFO -->
+        <appender name="info" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+                <level>INFO</level>
+            </filter>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>${LOG_PATH}/logs/%d{yyyyMMdd}/INFO-%d{yyyyMMdd}.%i.log</fileNamePattern>
+                <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                    <maxFileSize>1MB</maxFileSize>
+                    <maxHistory>1</maxHistory>
+                </timeBasedFileNamingAndTriggeringPolicy>
+            </rollingPolicy>
+            <encoder>
+                <Pattern>
+                    %d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger - %m%n
+                </Pattern>
+            </encoder>
+        </appender>
+
+        <logger name="com.ming.kiworkshoptest" level="INFO"/>
+
+        <root level="info">
+            <appender-ref ref="info"/>
+        </root>
+    </springProfile>
+
+
+</configuration>
