@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<appender name="warn" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+        <level>WARN</level>
+    </filter>
+    <filter class="ch.qos.logback.classic.filter.LevelFilter">
+        <level>ERROR</level>
+        <onMatch>DENY</onMatch>
+    </filter>
+
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+        <fileNamePattern>${LOG_PATH}/logs/%d{yyyyMMdd}/WARN-%d{yyyyMMdd}.%i.log</fileNamePattern>
+        <maxHistory>1</maxHistory>
+        <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+            <maxFileSize>1MB</maxFileSize>
+        </timeBasedFileNamingAndTriggeringPolicy>
+    </rollingPolicy>
+
+    <encoder>
+        <Pattern>
+            %d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger - %m%n
+        </Pattern>
+    </encoder>
+</appender>
+
