@@ -1,0 +1,9 @@
+server:
+  tomcat:
+    basedir: /Users/kimminji/ming/kiworkshop/tomcat
+    accesslog:
+      enabled: true
+      suffix: .log
+      prefix: access_log_
+      file-date-format: yyyy-MM-dd
+      directory: logs
