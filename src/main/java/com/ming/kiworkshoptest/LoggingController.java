@@ -27,9 +27,11 @@ public class LoggingController {
         return "ERROR";
     }
 
-    @GetMapping("/debug")
-    public String debug() {
-        log.debug("debug api log");
-        return "DEBUG";
+    @GetMapping("/all")
+    public String all() {
+        log.info("info api log");
+        log.warn("warn api log");
+        log.error("error api log");
+        return "ALL LOG LEVEL";
     }
 }
