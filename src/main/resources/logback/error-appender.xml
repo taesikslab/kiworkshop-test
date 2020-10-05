@@ -4,18 +4,20 @@
         <level>ERROR</level>
     </filter>
 
+    <file>${LOG_PATH}/error.log</file>
+
     <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-        <fileNamePattern>${LOG_PATH}/logs/%d{yyyyMMdd}/ERROR-%d{yyyyMMdd}.%i.log</fileNamePattern>
-        <maxHistory>1</maxHistory>
+        <fileNamePattern>${LOG_PATH}/backup-logs/%d{yyyyMMdd}/ERROR-%d{yyyyMMdd}.%i.log.zip</fileNamePattern>
+        <maxHistory>5</maxHistory>
         <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-            <maxFileSize>1MB</maxFileSize>
+            <maxFileSize>10MB</maxFileSize>
         </timeBasedFileNamingAndTriggeringPolicy>
     </rollingPolicy>
 
-    <encoder>
-        <Pattern>
-            %d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger - %m%n
-        </Pattern>
+    <encoder class="net.logstash.logback.encoder.LogstashEncoder" >
+        <includeContext>true</includeContext>
+        <includeCallerData>true</includeCallerData>
+        <timestampPattern>yyyy-MM-dd HH:mm:ss.SSS</timestampPattern>
     </encoder>
 </appender>
 
