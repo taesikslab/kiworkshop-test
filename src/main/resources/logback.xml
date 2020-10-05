@@ -14,10 +14,10 @@
 
         <logger name="com.ming.kiworkshoptest" level="TRACE"/>
 
-        <root level="info">
-            <appender-ref ref="info"/>
-            <appender-ref ref="warn"/>
-            <appender-ref ref="error"/>
+        <root level="INFO">
+            <appender-ref ref="async-info"/>
+            <appender-ref ref="async-warn"/>
+            <appender-ref ref="async-error"/>
         </root>
     </springProfile>
 

@@ -1,30 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<appender name="info" class="ch.qos.logback.core.rolling.RollingFileAppender">
-    <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-        <level>INFO</level>
-    </filter>
-    <filter class="ch.qos.logback.classic.filter.LevelFilter">
-        <level>WARN</level>
-        <onMatch>DENY</onMatch>
-    </filter>
-    <filter class="ch.qos.logback.classic.filter.LevelFilter">
-        <level>ERROR</level>
-        <onMatch>DENY</onMatch>
-    </filter>
+<included>
+    <appender name="info" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>WARN</level>
+            <onMatch>DENY</onMatch>
+        </filter>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>DENY</onMatch>
+        </filter>
 
-    <file>${LOG_PATH}/info.log</file>
+        <file>${LOG_PATH}/info.log</file>
 
-    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-        <fileNamePattern>${LOG_PATH}/backup-logs/%d{yyyyMMdd}/INFO-%d{yyyyMMdd}.%i.log.zip</fileNamePattern>
-        <maxHistory>5</maxHistory>
-        <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-            <maxFileSize>10MB</maxFileSize>
-        </timeBasedFileNamingAndTriggeringPolicy>
-    </rollingPolicy>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/backup-logs/%d{yyyyMMdd}/INFO-%d{yyyyMMdd}.%i.log.zip</fileNamePattern>
+            <maxHistory>5</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>10MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
 
-    <encoder class="net.logstash.logback.encoder.LogstashEncoder" >
-        <includeContext>true</includeContext>
-        <includeCallerData>true</includeCallerData>
-        <timestampPattern>yyyy-MM-dd HH:mm:ss.SSS</timestampPattern>
-    </encoder>
-</appender>
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder" >
+            <includeContext>true</includeContext>
+            <includeCallerData>true</includeCallerData>
+            <timestampPattern>yyyy-MM-dd HH:mm:ss.SSS</timestampPattern>
+        </encoder>
+    </appender>
+
+    <appender name="async-info" class="ch.qos.logback.classic.AsyncAppender">
+        <maxFlushTime>0</maxFlushTime>
+        <includeCallerData>false</includeCallerData>
+        <appender-ref ref="info"/>
+    </appender>
+</included>
