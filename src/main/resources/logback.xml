@@ -6,14 +6,13 @@
 
     <springProfile name="prod">
         <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
-        <property name="LOG_PATH" value="/Users/kimminji/ming/kiworkshop/spring"/>
+        <property name="LOG_PATH" value="./kiworkshop/spring"/>
 
         <include resource="logback/info-appender.xml"/>
         <include resource="logback/warn-appender.xml"/>
         <include resource="logback/error-appender.xml"/>
-        <include resource="logback/debug-appender.xml"/>
 
-        <logger name="com.ming.kiworkshoptest" level="INFO"/>
+        <logger name="com.ming.kiworkshoptest" level="TRACE"/>
 
         <root level="info">
             <appender-ref ref="info"/>
@@ -21,6 +20,5 @@
             <appender-ref ref="error"/>
         </root>
     </springProfile>
-
 
 </configuration>
